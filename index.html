@@ -3,24 +3,51 @@
         Minecraft Advancements Overview
     </title>
 
+    <script>
+
+        function onload() {
+            const inputElement = document.getElementById("uploadFileName")
+
+            inputElement.onchange = (e) => {
+
+                const file = inputElement.files[0]
+                
+                const reader = new FileReader()
+
+                reader.onload = (e) => {
+                    const textContent = e.target.result
+                    console.log(`The content of ${file.name} is ${textContent}`)
+                }
+                reader.onerror = (e) => {
+                    const error = e.target.error
+                    console.error(`Error occured while reading ${file.name}`, error)
+                }
+                reader.readAsText(file)
+            }
+        }
+    </script>
+
+
     <style>
 
         .maincontainer {
+            margin: auto;
             width: 80%;
-            align-content: center;
+            text-align: center;
             background-color: bisque;
             border-radius: 5px;
         }
 
     </style>
 
-    <body>
+    <body onload="JavaScript:onload()">
         <div class="maincontainer header">
-            <h1>Header</h1>
+            <h1>Welcome to Minecraft Advancements Overview</h1>
+            <h2>Upload your Advancements File below and see the Progress on your Advancements!</h2>
         </div>
 
         <div class="maincontainer content">
-            <h3>Content</h3>
+            <input id="uploadFileName" name="uploadFileName" type="file"><br>
         </div>
 
         <div class="maincontainer fooder">
